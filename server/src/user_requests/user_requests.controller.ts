@@ -49,11 +49,26 @@ export class UserRequestsController {
     return messages;
   }
 
-  @ApiOperation({ summary: 'create user request' })
+  @ApiOperation({ summary: 'get request' })
   @ApiResponse({ status: 200 })
   @UseGuards(AuthGuard)
   @Get('/:id')
   async getRequests(
+    @Param('id') id: string,
+    @Req() { user }: { user: JwtPayload },
+  ) {
+    const messages = this.userReqService.getRequestById({
+      id: Number(id),
+      userId: user.id,
+    });
+    return messages;
+  }
+
+  @ApiOperation({ summary: 'create response' })
+  @ApiResponse({ status: 200 })
+  @UseGuards(AuthGuard)
+  @Get('/:id/res')
+  async getResponse(
     @Param('id') id: string,
     @Req() { user }: { user: JwtPayload },
   ) {

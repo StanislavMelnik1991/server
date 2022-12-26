@@ -25,24 +25,6 @@ export class ResRepository {
     return req;
   }
 
-  getAllForUser({
-    skip = 0,
-    take = 10,
-    userId,
-  }: {
-    userId: number;
-    skip: number;
-    take: number;
-  }) {
-    const requests = this.reqRepository.find({
-      where: { userId },
-      skip,
-      take,
-      select: { title: true, id: true },
-    });
-    return requests;
-  }
-
   findById(id: number) {
     return this.reqRepository.findOne({ where: { id } });
   }

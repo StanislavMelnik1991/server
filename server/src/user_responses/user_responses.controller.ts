@@ -42,7 +42,7 @@ export class UserResponsesController {
     return await this.userResponsesService.getAllReqForUser(Number(id));
   }
 
-  @ApiOperation({ summary: 'get all active requests for user' })
+  @ApiOperation({ summary: 'get active requests' })
   @ApiResponse({ status: 200 })
   @Roles(ROLE.ADMIN)
   @UseGuards(RolesGuard)
