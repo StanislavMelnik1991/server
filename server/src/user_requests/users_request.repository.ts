@@ -32,11 +32,11 @@ export class ReqRepository {
     skip: number;
     take: number;
   }) {
-    const requests = this.reqRepository.find({
+    const requests = this.reqRepository.findAndCount({
       where: { userId },
       skip,
       take,
-      select: { title: true, id: true },
+      select: { title: true, id: true, isDone: true },
     });
     return requests;
   }
