@@ -16,7 +16,7 @@ export const MyRequests = () => {
     <Paper>
       {userRequests.map((el) => {
         return (
-          <Typography variant='h4'>{el.title}</Typography>
+          <Typography variant='h4' key={el.id}>{el.title}</Typography>
         )
       })}
     </Paper>

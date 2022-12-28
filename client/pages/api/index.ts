@@ -69,7 +69,6 @@ class Controller {
       },
     });
     const [requests, total] = await res.json()
-    console.log(requests)
     return {requests, total}
   }
 }
