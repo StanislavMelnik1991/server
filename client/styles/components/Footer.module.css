@@ -1,0 +1,8 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+.border{
+  height: 0.5rem;
+  border-bottom: 2px solid aliceblue;
+}
