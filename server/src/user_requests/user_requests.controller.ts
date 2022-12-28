@@ -42,7 +42,7 @@ export class UserRequestsController {
     @Query() dto: GetAllRequestQueryDto,
     @Req() { user }: { user: JwtPayload },
   ) {
-    const messages = this.userReqService.getAllRequestsForUser({
+    const messages = await this.userReqService.getAllRequestsForUser({
       ...dto,
       userId: user.id,
     });
@@ -57,7 +57,7 @@ export class UserRequestsController {
     @Param('id') id: string,
     @Req() { user }: { user: JwtPayload },
   ) {
-    const messages = this.userReqService.getRequestById({
+    const messages = await this.userReqService.getRequestById({
       id: Number(id),
       userId: user.id,
     });
@@ -72,7 +72,7 @@ export class UserRequestsController {
     @Param('id') id: string,
     @Req() { user }: { user: JwtPayload },
   ) {
-    const messages = this.userReqService.getRequestById({
+    const messages = await this.userReqService.getRequestById({
       id: Number(id),
       userId: user.id,
     });
