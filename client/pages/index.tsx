@@ -1,5 +1,3 @@
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
 import { MainHead } from '../components/head/head'
 import { Header } from '../components/header'
 import { Footer } from '../components/footer/indext'
