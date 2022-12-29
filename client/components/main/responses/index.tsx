@@ -18,6 +18,7 @@ export const Responses = () => {
   };
   const handleChangeRequest = (event: SyntheticEvent, newValue: number) => {
     setRequest(requests[newValue])
+    console.log(requests[newValue])
     setRequestValue(newValue);
   };
   useEffect(() => {
@@ -32,7 +33,7 @@ export const Responses = () => {
         })
       }
     })
-  }, [users])
+  }, [])
   return (
     <Paper sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', maxHeight: '80vh' }}>
       <Tabs
@@ -84,7 +85,14 @@ export const Responses = () => {
                 await Controller.createNewResponse({ message }, request.id)
                 const users = await Controller.getAllUsers()
                 setUsers(users)
-
+                if (users.length) {
+                  Controller.getAllActiveRequestsForUser(users[0].id).then((requests) => {
+                    setRequests(requests)
+                    if (requests.length) {
+                      setRequest(requests[0])
+                    }
+                  })
+                }
                 setMessage('')
               } catch (e) {
                 console.log(e)

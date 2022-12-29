@@ -40,7 +40,7 @@ function _extends() {
 
 /***/ }),
 
-/***/ 626:
+/***/ 648:
 /***/ ((__unused_webpack_module, exports) => {
 
 var __webpack_unused_export__;
@@ -128,7 +128,7 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports["default"] = void 0;
-var _interop_require_default = (__webpack_require__(626)/* ["default"] */ .Z);
+var _interop_require_default = (__webpack_require__(648)/* ["default"] */ .Z);
 var _react = _interop_require_default(__webpack_require__(689));
 var _head = _interop_require_default(__webpack_require__(121));
 const statusCodes = {
@@ -236,7 +236,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports.defaultHead = defaultHead;
 exports["default"] = void 0;
 var _extends = (__webpack_require__(495)/* ["default"] */ .Z);
-var _interop_require_default = (__webpack_require__(626)/* ["default"] */ .Z);
+var _interop_require_default = (__webpack_require__(648)/* ["default"] */ .Z);
 var _interop_require_wildcard = (__webpack_require__(598)/* ["default"] */ .Z);
 var _react = _interop_require_wildcard(__webpack_require__(689));
 var _sideEffect = _interop_require_default(__webpack_require__(470));

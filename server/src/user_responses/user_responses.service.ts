@@ -39,10 +39,13 @@ export class UserResponsesService {
     reqId: number;
     userId: number;
   }) {
-    await this.resRepository.create({
-      message,
-      reqId,
-      userId,
-    });
+    await Promise.all([
+      this.resRepository.create({
+        message,
+        reqId,
+        userId,
+      }),
+      this.reqRepository.closeRequest(reqId),
+    ]);
   }
 }

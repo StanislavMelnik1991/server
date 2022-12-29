@@ -26,4 +26,10 @@ export class ReqRepository {
   findById(id: number) {
     return this.reqRepository.findOne({ where: { id } });
   }
+
+  async closeRequest(id: number) {
+    const res = await this.reqRepository.findOne({ where: { id } });
+    res.isDone = true;
+    await this.reqRepository.save(res);
+  }
 }
