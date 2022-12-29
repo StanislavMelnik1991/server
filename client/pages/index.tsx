@@ -46,7 +46,7 @@ export default function Home() {
             aria-label="full width tabs example"
           >
             <Tab label="Новости" wrapped />
-            <Tab label="Отправить обращение" disabled={!token} />
+            <Tab label="Отправить обращение" disabled={!token || role===ROLE.ADMIN} />
             <Tab label="Ответы" disabled={role !== ROLE.ADMIN} />
             <Tab label="О нас" />
             <Tab label="Контакты" />

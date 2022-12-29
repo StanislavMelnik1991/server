@@ -53,6 +53,7 @@ export const MyRequests = () => {
         setId(res.requests[0].id)
         Controller.getUserRequest(res.requests[0].id).then((ev) => {
           setMessage(ev.message)
+          setIsDone(ev.isDone)
         })
       }
     })
