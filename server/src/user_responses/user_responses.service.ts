@@ -12,8 +12,16 @@ export class UserResponsesService {
     private userRepository: UserRepository,
   ) {}
 
-  getAllUsers({ limit, offset }: GetAllUsersQueryDto) {
-    return this.userRepository.findAllUsers({ skip: offset, take: limit });
+  async getAllUsers({ limit = 10, offset = 0 }: GetAllUsersQueryDto) {
+    const users = await this.userRepository.findAllUsers({
+      skip: offset,
+      take: limit,
+    });
+    users.map(async (user) => {
+      const total = await this.reqRepository.countActiveForUser(user.id);
+      return { ...user, total };
+    });
+    return Promise.all(users);
   }
 
   getAllReqForUser(userId: number) {

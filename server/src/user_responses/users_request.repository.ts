@@ -17,7 +17,13 @@ export class ReqRepository {
     });
     return requests;
   }
-
+  async countActiveForUser(userId: number) {
+    const [, total] = await this.reqRepository.findAndCount({
+      where: { userId, isDone: false },
+      select: { title: true, id: true },
+    });
+    return total;
+  }
   findById(id: number) {
     return this.reqRepository.findOne({ where: { id } });
   }

@@ -28,7 +28,7 @@ export default function SignUp() {
         title='Войти'
       />
       <Header token={token} clear={setToken} />
-      <Paper sx={{ width: '100%', minHeight: '50vh', padding: '1rem', display: 'flex', justifyContent: 'center' }}>
+      <Paper sx={{ width: '100%', padding: '1rem', display: 'flex', justifyContent: 'center' }}>
         <Paper variant='outlined' sx={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <TextField
             label='email'

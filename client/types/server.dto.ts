@@ -1,3 +1,5 @@
+import { ROLE } from "../constants/user.constants";
+
 export type CreateNewUserBodyDto = {
   name: string;
   email: string;
@@ -23,4 +25,14 @@ isDone: boolean;
 message: string;
 title: string;
 userId: 2
+}
+
+export type UsersForAdminDto = {
+  total: number;
+  name: string;
+  password: string;
+  email: string;
+  requests: RequestDto[];
+  role: ROLE;
+  id: number;
 }
