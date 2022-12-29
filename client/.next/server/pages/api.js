@@ -5,7 +5,7 @@ exports.id = 237;
 exports.ids = [237];
 exports.modules = {
 
-/***/ 924:
+/***/ 648:
 /***/ ((module) => {
 
 module.exports = import("axios");;

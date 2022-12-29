@@ -19,7 +19,6 @@ export default function SignUp() {
 
   useEffect(() => {
     const localToken = window.localStorage.getItem('token');
-    console.log(localToken)
     setToken(localToken);
   }, [])
   return (

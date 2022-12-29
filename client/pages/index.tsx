@@ -19,8 +19,6 @@ export default function Home() {
   useEffect(() => {
     const localToken = window.localStorage.getItem('token');
     const serverRole = window.localStorage.getItem('role');
-    console.log(localToken)
-    console.log(serverRole)
     setToken(localToken);
     if (serverRole === ROLE.ADMIN) {
       setRole(serverRole)

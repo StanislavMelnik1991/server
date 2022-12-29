@@ -36,3 +36,7 @@ export type UsersForAdminDto = {
   role: ROLE;
   id: number;
 }
+
+export type CreateResponseBodyDto = {
+  message: string;
+}

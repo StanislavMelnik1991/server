@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/mgg8nygxqeUekx-DpvmUc/_buildManifest.js",
-    "static/mgg8nygxqeUekx-DpvmUc/_ssgManifest.js"
+    "static/Gp6coN2n7_RacJHvaqAAr/_buildManifest.js",
+    "static/Gp6coN2n7_RacJHvaqAAr/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -16,7 +16,7 @@
       "static/chunks/main-010ff0b6bbe5ac8f.js",
       "static/chunks/558-08d16fec5288fc42.js",
       "static/css/c0b075a2bb48a9cb.css",
-      "static/chunks/pages/index-6b0be8d006470dab.js"
+      "static/chunks/pages/index-39cdfe3daddd8ee9.js"
     ],
     "/_app": [
       "static/chunks/webpack-0b5d8249fb15f5f3.js",
@@ -37,7 +37,7 @@
       "static/chunks/main-010ff0b6bbe5ac8f.js",
       "static/chunks/558-08d16fec5288fc42.js",
       "static/css/c0b075a2bb48a9cb.css",
-      "static/chunks/pages/signIn-3556c9aae6213c01.js"
+      "static/chunks/pages/signIn-1101f648171194ee.js"
     ],
     "/signUp": [
       "static/chunks/webpack-0b5d8249fb15f5f3.js",
@@ -45,7 +45,7 @@
       "static/chunks/main-010ff0b6bbe5ac8f.js",
       "static/chunks/558-08d16fec5288fc42.js",
       "static/css/c0b075a2bb48a9cb.css",
-      "static/chunks/pages/signUp-1abd732d3c658984.js"
+      "static/chunks/pages/signUp-99fc4d0cbfb2330b.js"
     ]
   },
   "ampFirstPages": []

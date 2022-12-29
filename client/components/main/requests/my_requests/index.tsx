@@ -49,10 +49,12 @@ export const MyRequests = () => {
     const newReq = Controller.getAllUserRequests()
     newReq.then((res) => {
       setUserRequests(res.requests)
-      setId(res.requests[0].id)
-      Controller.getUserRequest(res.requests[0].id).then((ev) => {
-        setMessage(ev.message)
-      })
+      if (res.requests.length) {
+        setId(res.requests[0].id)
+        Controller.getUserRequest(res.requests[0].id).then((ev) => {
+          setMessage(ev.message)
+        })
+      }
     })
   },
     [])

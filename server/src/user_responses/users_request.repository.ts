@@ -13,7 +13,6 @@ export class ReqRepository {
   getAllActiveForUser(userId: number) {
     const requests = this.reqRepository.find({
       where: { userId, isDone: false },
-      select: { title: true, id: true },
     });
     return requests;
   }

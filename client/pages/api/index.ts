@@ -1,14 +1,11 @@
 import { ROLE } from "../../constants/user.constants";
-import { CreateNewUserBodyDto, CreateUserRequestBodyDto, LoginUserBodyDto, RequestDto, ShortRequestDto, UsersForAdminDto } from "../../types/server.dto";
+import { CreateNewUserBodyDto, CreateResponseBodyDto, CreateUserRequestBodyDto, LoginUserBodyDto, RequestDto, ShortRequestDto, UsersForAdminDto } from "../../types/server.dto";
 import axios, { AxiosResponse } from 'axios'
 
 const baseLink = 'http://localhost:5000/api';
 
 class Controller {
   baseLink: string;
-
-  options?: string;
-
 
   constructor(link: string) {
     this.baseLink = link;
@@ -83,6 +80,15 @@ class Controller {
       const requests = res.data as RequestDto[];
       return requests
     })
+  }
+
+  async createNewResponse(dto: CreateResponseBodyDto, reqId: number) {
+    const token = window.localStorage.getItem('token');
+    await axios.post(
+      `${this.baseLink}/admin/${reqId}`,
+      dto,
+      { headers: { 'Authorization': `Bearer ${token}` } }
+    )
   }
 
   private async auth(res: AxiosResponse<any, any>) {
