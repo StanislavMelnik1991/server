@@ -1,4 +1,6 @@
-import { CreateNewUserBodyDto, CreateUserRequestBodyDto, LoginUserBodyDto } from "../../types/server.dto";
+import { ROLE } from "../../constants/user.constants";
+import { CreateNewUserBodyDto, CreateUserRequestBodyDto, LoginUserBodyDto, RequestDto, ShortRequestDto } from "../../types/server.dto";
+import axios, { AxiosResponse } from 'axios'
 
 const baseLink = 'http://localhost:5000/api';
 
@@ -7,69 +9,65 @@ class Controller {
 
   options?: string;
 
-  token: string| null;
 
   constructor(link: string) {
     this.baseLink = link;
-    this.token = null
   }
 
-  async createUser(user: CreateNewUserBodyDto) {
-    const rawResponse = await fetch(`${this.baseLink}/auth/signUp`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    const {token} = await rawResponse.json();
-    this.token = token
-    window.localStorage.setItem('token', token)
-    console.log(this.token)
-    return this.token;
+  async createUser(dto: CreateNewUserBodyDto) {
+    await axios.post(`${this.baseLink}/auth/signUp`, dto).then(this.auth)
   }
 
-  async loginUser(user: LoginUserBodyDto) {
-    const rawResponse = await fetch(`${this.baseLink}/auth/signIn`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    const {token} = await rawResponse.json();
-    this.token = token
-    window.localStorage.setItem('token', token)
-    return this.token;
+  async loginUser(dto: LoginUserBodyDto) {
+    await axios.post(`${this.baseLink}/auth/signIn`, dto).then(this.auth)
+
   }
 
-  async createUserRequest(user: CreateUserRequestBodyDto) {
-    this.token = window.localStorage.getItem('token');
-    await fetch(`${this.baseLink}/res`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
-      },
-      body: JSON.stringify(user),
-    });
+  async createUserRequest(dto: CreateUserRequestBodyDto) {
+    const token = window.localStorage.getItem('token');
+    await axios.post(`${this.baseLink}/req`, dto, { headers: { 'Authorization': `Bearer ${token}` } })
   }
 
   async getAllUserRequests() {
-    this.token = window.localStorage.getItem('token');
-    const res = await fetch(`${this.baseLink}/res`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
-      },
-    });
-    const [requests, total] = await res.json()
-    return {requests, total}
+    const token = window.localStorage.getItem('token');
+    const result = await axios.get(
+      `${this.baseLink}/req`,
+      { headers: { 'Authorization': `Bearer ${token}` } },
+    ).then((res) => {
+      const [requests, total] = res.data as [Array<ShortRequestDto>, number]
+      return { requests, total }
+    })
+
+    return result
+  }
+
+  async getUserRequest(id: number) {
+    const token = window.localStorage.getItem('token');
+    return await axios.get(
+      `${this.baseLink}/req/${id}`,
+      { headers: { 'Authorization': `Bearer ${token}` } },
+    ).then((res) => {
+      const userRequest = res.data as RequestDto;
+      return userRequest
+    })
+  }
+
+  async getUserResponse(id: number) {
+    const token = window.localStorage.getItem('token');
+    return await axios.get(
+      `${this.baseLink}/req/res/${id}`,
+      { headers: { 'Authorization': `Bearer ${token}` } },
+    ).then((res) => {
+      const userRequest = res.data as RequestDto;
+      return userRequest
+    })
+  }
+
+  private async auth(res: AxiosResponse<any, any>) {
+    const { role, token } = await res.data as { token: string, role: ROLE }
+    window.localStorage.setItem('token', token)
+    window.localStorage.setItem('role', role)
+    return { role, token }
   }
 }
 export default new Controller(baseLink);

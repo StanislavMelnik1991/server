@@ -38,7 +38,7 @@ export class UserRequestsService {
       this.reqRepository.findById(reqId),
       this.resRepository.findByReqId(reqId),
     ]);
-    if (req.userId === userId) {
+    if (req.userId !== userId) {
       throw new HttpException(ERROR_MESSAGE.FORBIDDEN, HttpStatus.FORBIDDEN);
     }
     if (!res) {

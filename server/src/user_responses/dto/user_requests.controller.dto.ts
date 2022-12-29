@@ -20,12 +20,6 @@ export class GetAllUsersQueryDto {
 }
 
 export class CreateResponseBodyDto {
-  @ApiProperty({ example: 'Жалоба', description: 'response title' })
-  @IsNotEmpty({ message: 'is required' })
-  @IsString({ message: 'mast be string' })
-  @Length(1, 256)
-  readonly title: string;
-
   @ApiProperty({ example: 'всё починим', description: 'response text' })
   @IsNotEmpty({ message: 'is required' })
   @IsString({ message: 'mast be string' })

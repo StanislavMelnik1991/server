@@ -5,6 +5,8 @@ import { Footer } from '../components/footer/indext'
 import { Button, Paper, TextField } from '@mui/material'
 import Controller from './api/index'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Home from '.'
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -12,6 +14,9 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [token, setToken] = useState<string | null>(null);
+
+  const router = useRouter()
+
   useEffect(() => {
     const localToken = window.localStorage.getItem('token');
     console.log(localToken)
@@ -22,7 +27,7 @@ export default function SignUp() {
       <MainHead
         title='Войти'
       />
-      <Header token={token} clear={setToken}/>
+      <Header token={token} clear={setToken} />
       <Paper sx={{ width: '100%', minHeight: '50vh', padding: '1rem', display: 'flex', justifyContent: 'center' }}>
         <Paper variant='outlined' sx={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <TextField
@@ -64,8 +69,11 @@ export default function SignUp() {
           <Button
             variant='contained'
             onClick={() => {
-              if (password === password2){
-                Controller.createUser({ email, name, password })
+              if (password === password2) {
+                const serverToken = Controller.createUser({ email, name, password })
+                serverToken.then(()=>{
+                  router.push('/', undefined, {shallow: true})
+                })
               }
             }}>
             {'Регистрация'}

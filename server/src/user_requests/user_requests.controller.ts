@@ -18,7 +18,7 @@ import {
 import { UserRequestsService } from './user_requests.service';
 
 @ApiTags('Requests')
-@Controller('api/res')
+@Controller('api/req')
 export class UserRequestsController {
   constructor(private userReqService: UserRequestsService) {}
 
@@ -64,16 +64,16 @@ export class UserRequestsController {
     return messages;
   }
 
-  @ApiOperation({ summary: 'create response' })
+  @ApiOperation({ summary: 'get response' })
   @ApiResponse({ status: 200 })
   @UseGuards(AuthGuard)
-  @Get('/:id/res')
+  @Get('/res/:id')
   async getResponse(
     @Param('id') id: string,
     @Req() { user }: { user: JwtPayload },
   ) {
-    const messages = await this.userReqService.getRequestById({
-      id: Number(id),
+    const messages = await this.userReqService.getResponse({
+      reqId: Number(id),
       userId: user.id,
     });
     return messages;

@@ -25,18 +25,15 @@ export class UserResponsesService {
   async createResponse({
     message,
     reqId,
-    title,
     userId,
   }: {
     message: string;
     reqId: number;
-    title: string;
     userId: number;
   }) {
     await this.resRepository.create({
       message,
       reqId,
-      title,
       userId,
     });
   }

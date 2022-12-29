@@ -1,8 +1,8 @@
 import { Button, Paper, TextField } from '@mui/material'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import Controller from '../../../../pages/api/index'
 
-export const NewRequest = () => {
+export const NewRequest = ({ setValue }: { setValue: Dispatch<SetStateAction<number>> }) => {
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
 
@@ -29,8 +29,15 @@ export const NewRequest = () => {
         />
         <Button
           variant='contained'
-          onClick={() => {
-            Controller.createUserRequest({ message, title })
+          onClick={async () => {
+            try {
+              await Controller.createUserRequest({ message, title })
+              setMessage('')
+              setTitle('')
+              setValue(1)
+            } catch (e) {
+              console.log(e)
+            }
           }}
         >
           {'Отправить'}

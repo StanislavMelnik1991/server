@@ -9,6 +9,7 @@ import { JwtPayload } from 'src/types/jwt.type';
 import { HASH_ROUNDS } from 'src/constants/auth.constants';
 import { ERROR_MESSAGE } from 'src/constants/error.constants';
 import { UsersRepository } from './users.repository';
+import { ROLE } from 'src/constants/user.constants';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +22,7 @@ export class AuthService {
     email,
     name,
     password,
-  }: CreateNewUserBodyDto): Promise<string> {
+  }: CreateNewUserBodyDto): Promise<{ token: string; role: ROLE }> {
     const conflict = !!(await this.userRepository.findByEmail(email));
     if (conflict) {
       throw new HttpException(
@@ -40,10 +41,13 @@ export class AuthService {
       id: user.id,
       role: user.role,
     });
-    return token;
+    return { token, role: user.role };
   }
 
-  async login({ email, password }: LoginUserBodyDto): Promise<string> {
+  async login({
+    email,
+    password,
+  }: LoginUserBodyDto): Promise<{ token: string; role: ROLE }> {
     const user = await this.userRepository.findByEmail(email);
     if (!user) {
       throw new HttpException(
@@ -63,7 +67,7 @@ export class AuthService {
       id: user.id,
       role: user.role,
     });
-    return token;
+    return { token, role: user.role };
   }
 
   private generateToken: (jwtPayload: JwtPayload) => string = (jwtPayload) => {

@@ -8,16 +8,24 @@ import { Requests } from '../components/main/requests'
 import { Responses } from '../components/main/responses'
 import { AboutUs } from '../components/main/about_us'
 import { Contacts } from '../components/main/contacts'
+import { ROLE } from '../constants/user.constants'
 
 
 
 export default function Home() {
   const [value, setValue] = useState(0);
   const [token, setToken] = useState<string | null>(null);
+  const [role, setRole] = useState<ROLE>(ROLE.USER);
   useEffect(() => {
     const localToken = window.localStorage.getItem('token');
+    const serverRole = window.localStorage.getItem('role');
     console.log(localToken)
+    console.log(serverRole)
     setToken(localToken);
+    if (serverRole === ROLE.ADMIN) {
+      setRole(serverRole)
+    }
+
   }, [])
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -28,7 +36,7 @@ export default function Home() {
       <MainHead
         title='ЖЭС-Обращения'
       />
-      <Header token={token} clear={setToken}/>
+      <Header token={token} clear={setToken} />
       <Paper variant='outlined'>
         <AppBar position="static">
           <Tabs
@@ -40,8 +48,8 @@ export default function Home() {
             aria-label="full width tabs example"
           >
             <Tab label="Новости" wrapped />
-            <Tab label="Отправить обращение" />
-            <Tab label="Ответы" />
+            <Tab label="Отправить обращение" disabled={!token} />
+            <Tab label="Ответы" disabled={role !== ROLE.ADMIN} />
             <Tab label="О нас" />
             <Tab label="Контакты" />
           </Tabs>

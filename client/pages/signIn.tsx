@@ -5,11 +5,14 @@ import { Footer } from '../components/footer/indext'
 import { Button, Paper, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Controller from './api/index'
+import { useRouter } from 'next/router'
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter()
+  
   useEffect(() => {
     const localToken = window.localStorage.getItem('token');
     console.log(localToken)
@@ -43,9 +46,11 @@ export default function SignIn() {
           />
           <Button
             variant='contained'
-            href='/'
             onClick={() => {
-              Controller.loginUser({ email, password })
+              const serverToken = Controller.loginUser({ email, password })
+              serverToken.then(()=>{
+                router.push('/', undefined, {shallow: true})
+              })
             }}
           >
             {'Войти'}

@@ -6,9 +6,6 @@ import { UserReq } from './user_request.entity';
 @Entity('responses')
 export class UserRes extends BaseEntity {
   @Column()
-  title: string;
-
-  @Column()
   message: string;
 
   @ManyToOne(() => User)

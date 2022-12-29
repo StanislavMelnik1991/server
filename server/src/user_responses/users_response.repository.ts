@@ -11,16 +11,14 @@ export class ResRepository {
   ) {}
   async create({
     message,
-    title,
     userId,
     reqId,
   }: {
     userId: number;
     reqId: number;
-    title: string;
     message: string;
   }): Promise<UserRes> {
-    const req = this.reqRepository.create({ userId, title, message, reqId });
+    const req = this.reqRepository.create({ userId, message, reqId });
     await this.reqRepository.save(req);
     return req;
   }
